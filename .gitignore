@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.png
+*.jpg
+*.jpeg
+*.wav
+*.pdf
+*.stego
+/tmp/
+logs/
+*.log
+
+# Secrets
+*.pem
+*.key
+*.crt
+config.json
+.secrets/
+
+# Test files
+/test_output/
+/stego_*
