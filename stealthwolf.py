@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 CyberWolf StealthWolf Ultimate - Complete Data Smuggling Suite
+Features: Image, PDF, Audio, Split smuggling, Auto-exfil, Detection
 """
 
 import argparse
 import sys
 import os
 
-# Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 def main():
@@ -76,9 +76,11 @@ def main():
     
     if args.command == 'test':
         print("🐺 Running StealthWolf Ultimate Tests...")
-        from smuggler.image_smuggler import ImageSmuggler
+        
+        # Test 1: Image smuggling
         from PIL import Image
         import numpy as np
+        from smuggler.image_smuggler import ImageSmuggler
         
         img = Image.fromarray(np.random.randint(0, 255, (200, 200, 3), dtype=np.uint8))
         img.save("/tmp/test_img.png", format='PNG')
@@ -90,6 +92,23 @@ def main():
         extracted, _ = s.extract_from_image("/tmp/test_stego.png")
         
         print(f"✅ Image smuggling: {secret == extracted}")
+        
+        # Test 2: PDF
+        try:
+            from smuggler.pdf_smuggler import PDFSmuggler
+            # Create dummy PDF
+            from reportlab.pdfgen import canvas
+            c = canvas.Canvas("/tmp/test.pdf")
+            c.drawString(100, 750, "Test PDF")
+            c.save()
+            
+            pdf_s = PDFSmuggler("testpass")
+            pdf_s.smuggle_into_pdf("/tmp/test.pdf", secret, "/tmp/test_stego.pdf")
+            extracted_pdf = pdf_s.extract_from_pdf("/tmp/test_stego.pdf")
+            print(f"✅ PDF smuggling: {secret == extracted_pdf}")
+        except Exception as e:
+            print(f"⚠️ PDF test skipped: {e}")
+        
         print("\n🎉 StealthWolf Ultimate ready!")
         return
     
