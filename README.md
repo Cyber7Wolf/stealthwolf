@@ -10,7 +10,7 @@
 ## ⚡ Quick Start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/stealthwolf.git
+git clone https://github.com/Cyber7Wolf/stealthwolf.git
 cd stealthwolf
 pip install -r requirements.txt
 python stealthwolf.py test
